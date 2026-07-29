@@ -471,9 +471,19 @@
 
   function render(c) {
 
-  // Ticker (list repeated twice for the seamless loop)
+  // Ticker — repeat the phrases until one half fills the screen,
+  // then double it so the -50% animation loops seamlessly
   const tick = c.ticker.map(t => `<span>${esc(t)}</span><span class="dot">●</span>`).join('');
-  $('ticker-track').innerHTML = tick + tick;
+  function buildTicker() {
+    if (!tick) return;
+    const track = $('ticker-track');
+    track.innerHTML = tick;
+    const copies = Math.ceil(window.innerWidth / track.scrollWidth) + 1;
+    const half = tick.repeat(copies);
+    track.innerHTML = half + half;
+}
+buildTicker();
+window.addEventListener('resize', buildTicker);
 
   // Brand + hero
   $('logo').textContent = c.logo;
