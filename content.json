@@ -1,60 +1,72 @@
 {
-  "logo": "Company Name",
+  "logo": "South Sole Clinic",
   "ticker": [
-    "Phrase 1",
-    "Phrase 2",
-    "Phrase 3",
-    "Phrase 4",
-    "Phrase 5",
-    "Phrase 6"
+    "Tongue",
+    "Insoles",
+    "Laces",
+    "Eyestay",
+    "Uppers",
+    "Collar lining",
+    "Outsole",
+    "Midsole"
   ],
-  "heroTag": "/// SNEAKER + SHOE CLEANING — NASHVILLE",
-  "heroLine1": "We clean",
-  "heroLine2": "Shoes",
-  "heroLine3Accent": "So you can walk",
-  "heroLine3Rest": "Confident",
-  "heroPara": "We clean shoes so you can be confident!",
+  "heroTag": "/// SHOE CLEANING - SAN PEDRO LAGUANA - NASHVILLE",
+  "heroLine1": "CLEAN FEET.",
+  "heroLine2": "CLEAN SHOE.",
+  "heroLine3Accent": "CLEAN LOOK.",
+  "heroLine3Rest": "",
+  "heroPara": "Does your sneakers look worn out? Bring them to South Sole Clinic for these special services. ",
   "packages": [
     {
-      "name": "Package 1",
-      "price": "$25",
-      "blurb": "Your message here",
+      "name": "Basic cleaning",
+      "price": "350",
+      "blurb": "For minimal dirt",
       "badge": "",
       "hot": false,
       "items": [
-        "Offering 1",
-        "Offering 2",
-        "Offering 3"
+        "Uppers",
+        "Outsoles"
       ]
     },
     {
-      "name": "Package 2",
-      "price": "$45",
-      "blurb": "Your message here",
+      "name": "Deep cleaning",
+      "price": "450",
+      "blurb": "For heavy dirt",
       "badge": "MOST POPULAR",
       "hot": true,
       "items": [
-        "Everything in Package 1",
-        "Offering 2",
-        "Offering 3",
-        "Offering 4"
+        "Uppers",
+        "Insoles",
+        "Outsoles"
       ]
     },
     {
-      "name": "Package 3",
-      "price": "$60",
-      "blurb": "Your message here",
+      "name": "Premium cleaning",
+      "price": "600",
+      "blurb": "For heavy dirt",
       "badge": "BEST DEAL",
       "hot": false,
       "items": [
-        "Offering 1",
-        "Offering 2",
-        "Offering 3"
+        "Uppers",
+        "Insoles",
+        "Outsoles",
+        "Laundry system"
+      ]
+    },
+    {
+      "name": "Un-yellowing",
+      "price": "Rubber: 500   Clear: 1000",
+      "blurb": "Remove the yellowing from the shoe",
+      "badge": "",
+      "hot": false,
+      "items": [
+        "Midsole",
+        "Undersole"
       ]
     }
   ],
-  "photoBefore": "/photos/before-1785349595465.jpg",
-  "photoAfter": "/photos/after-1785349647190.jpg",
+  "photoBefore": "/photos/before-1785359704552.jpg",
+  "photoAfter": "/photos/after-1785359707234.jpg",
   "steps": [
     {
       "title": "Send a Pic",
@@ -73,8 +85,8 @@
       "text": "Pick up your shoes looking good as new, and walk out with confidence."
     }
   ],
-  "phone": "(615) 111-1111",
-  "instagram": "@yourhandle",
-  "email": "shoes@shoes.com",
+  "phone": "+63 927 232 8599",
+  "instagram": "@southsoleclinic",
+  "email": "southsoleclinic@gmail.com",
   "footer": "© 2026 SHOES — Nashville, TN"
 }
