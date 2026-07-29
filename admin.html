@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Site Editor</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#101114;--paper:#F2F4F5;--orange:#FF4D00;--gray:#8A8F98;--ok:#0a7d3b;--bad:#c0271b}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Space Grotesk',sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;padding-bottom:120px}
+  .bar{background:var(--ink);color:var(--paper);padding:16px 5vw;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .bar h1{font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:.02em}
+  .bar h1 em{color:var(--orange);font-style:normal}
+  .bar a{color:var(--gray);font-family:'IBM Plex Mono',monospace;font-size:12px;text-decoration:none}
+  .bar a:hover{color:var(--orange)}
+  main{max-width:860px;margin:0 auto;padding:40px 20px}
+  fieldset{border:3px solid var(--ink);background:#fff;padding:26px;margin-bottom:32px;box-shadow:8px 8px 0 var(--ink)}
+  legend{font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:15px;padding:6px 14px;background:var(--ink);color:var(--paper)}
+  label{display:block;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;margin:16px 0 6px;color:#3a3d44}
+  input[type=text],input[type=password],textarea{width:100%;padding:11px 12px;border:2px solid var(--ink);font-family:'Space Grotesk',sans-serif;font-size:15px;background:var(--paper)}
+  input:focus,textarea:focus{outline:3px solid var(--orange);outline-offset:1px}
+  textarea{resize:vertical;min-height:70px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:600px){.row{grid-template-columns:1fr}}
+  .pkg{border:2px dashed var(--gray);padding:18px;margin-top:18px;background:var(--paper)}
+  .pkg .pkg-head{display:flex;justify-content:space-between;align-items:center}
+  .pkg .pkg-head strong{font-family:'Archivo Black',sans-serif;font-size:14px;text-transform:uppercase}
+  button{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;border:2px solid var(--ink);background:#fff;padding:9px 16px;cursor:pointer;transition:transform .1s}
+  button:hover{transform:translate(1px,1px)}
+  button:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+  button:disabled{opacity:.5;cursor:wait}
+  button.danger{border-color:var(--bad);color:var(--bad)}
+  button.add{background:var(--ink);color:var(--paper)}
+  .check{display:flex;align-items:center;gap:8px;margin-top:14px;font-size:14px}
+  .check input{width:18px;height:18px;accent-color:var(--orange)}
+  .photo-box{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:600px){.photo-box{grid-template-columns:1fr}}
+  .photo-slot{border:2px dashed var(--gray);padding:14px;text-align:center;background:var(--paper)}
+  .photo-slot img{max-width:100%;border:2px solid var(--ink);margin-top:10px;display:block}
+  .photo-slot .empty{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gray);padding:26px 8px}
+  .actions{position:fixed;bottom:0;left:0;right:0;background:var(--ink);padding:16px 5vw;display:flex;gap:14px;justify-content:flex-end;flex-wrap:wrap;z-index:10}
+  .actions button{padding:14px 28px;font-size:15px;border-color:var(--paper)}
+  .actions .save{background:var(--orange);color:#fff;border-color:var(--orange)}
+  .status{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--paper);align-self:center;margin-right:auto}
+  .status.ok{color:#7ce3a4}
+  .status.bad{color:#ff9b93}
+  /* Login */
+  .login{max-width:420px;margin:12vh auto 0;border:3px solid var(--ink);background:#fff;padding:34px;box-shadow:10px 10px 0 var(--ink)}
+  .login h2{font-family:'Archivo Black',sans-serif;text-transform:uppercase;font-size:22px}
+  .login p{font-size:14px;color:#3a3d44;margin-top:8px}
+  .login button{width:100%;margin-top:18px;background:var(--orange);color:#fff;border-color:var(--ink);padding:14px;font-size:15px}
+  .login .msg{font-family:'IBM Plex Mono',monospace;font-size:12px;margin-top:12px;min-height:18px}
+  .login .msg.bad{color:var(--bad)}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <h1>SITE <em>EDITOR</em></h1>
+  <a href="/" target="_blank" rel="noopener">View live site ↗</a>
+</div>
+
+<!-- LOGIN -->
+<div class="login" id="login">
+  <h2>Admin login</h2>
+  <p>Enter your admin password to edit the live site.</p>
+  <label for="pw">Password</label>
+  <input type="password" id="pw" autocomplete="current-password">
+  <button type="button" id="btn-login">Unlock</button>
+  <div class="msg" id="login-msg"></div>
+</div>
+
+<!-- EDITOR -->
+<main id="editor" hidden>
+
+  <fieldset>
+    <legend>Brand & Hero</legend>
+    <div class="row">
+      <div><label for="f-logo">Logo text</label><input type="text" id="f-logo"></div>
+      <div><label for="f-heroTag">Small tag above headline</label><input type="text" id="f-heroTag"></div>
+    </div>
+    <div class="row">
+      <div><label for="f-l1">Headline line 1 (solid)</label><input type="text" id="f-l1"></div>
+      <div><label for="f-l2">Headline line 2 (outlined)</label><input type="text" id="f-l2"></div>
+    </div>
+    <div class="row">
+      <div><label for="f-l3a">Line 3 — orange word(s)</label><input type="text" id="f-l3a"></div>
+      <div><label for="f-l3b">Line 3 — rest</label><input type="text" id="f-l3b"></div>
+    </div>
+    <label for="f-heroPara">Intro paragraph</label>
+    <textarea id="f-heroPara"></textarea>
+    <label for="f-ticker">Scrolling ticker phrases (one per line)</label>
+    <textarea id="f-ticker"></textarea>
+  </fieldset>
+
+  <fieldset>
+    <legend>Packages</legend>
+    <div id="pkg-list"></div>
+    <div style="margin-top:18px"><button type="button" class="add" id="add-pkg">+ Add package</button></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Before & After Photos</legend>
+    <div class="photo-box">
+      <div class="photo-slot">
+        <label for="f-before" style="margin-top:0">BEFORE photo</label>
+        <input type="file" id="f-before" accept="image/*">
+        <div id="prev-before"><div class="empty">No photo yet</div></div>
+        <button type="button" class="danger" id="clear-before" style="margin-top:10px">Remove</button>
+      </div>
+      <div class="photo-slot">
+        <label for="f-after" style="margin-top:0">AFTER photo</label>
+        <input type="file" id="f-after" accept="image/*">
+        <div id="prev-after"><div class="empty">No photo yet</div></div>
+        <button type="button" class="danger" id="clear-after" style="margin-top:10px">Remove</button>
+      </div>
+    </div>
+    <p style="margin-top:14px;font-size:13px;color:#3a3d44">Photos are resized automatically and saved into your GitHub repo's <code>photos/</code> folder when you hit Save.</p>
+  </fieldset>
+
+  <fieldset>
+    <legend>How It Works</legend>
+    <div id="step-list"></div>
+    <div style="margin-top:18px"><button type="button" class="add" id="add-step">+ Add step</button></div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Contact & Footer</legend>
+    <div class="row">
+      <div><label for="f-phone">Phone (as shown)</label><input type="text" id="f-phone"></div>
+      <div><label for="f-ig">Instagram handle</label><input type="text" id="f-ig"></div>
+    </div>
+    <div class="row">
+      <div><label for="f-email">Email</label><input type="text" id="f-email"></div>
+      <div><label for="f-footer">Footer text</label><input type="text" id="f-footer"></div>
+    </div>
+    <p style="margin-top:14px;font-size:13px;color:#3a3d44">The text/Instagram/email links are generated automatically from these values, so they always match what's displayed.</p>
+  </fieldset>
+
+</main>
+
+<div class="actions" id="actions" hidden>
+  <span class="status" id="status">Editing — changes aren't live until you save</span>
+  <button type="button" class="save" id="btn-save">Save — publish live</button>
+</div>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  let password = sessionStorage.getItem('admin-pw') || '';
+  // photos[which] = repo path like '/photos/x.jpg' (or '' for none)
+  // pending[which] = { path, base64, dataUrl } for a new photo awaiting save
+  let photos = { before: '', after: '' };
+  let pending = { before: null, after: null };
+
+  const auth = () => ({ 'Authorization': 'Bearer ' + password, 'Content-Type': 'application/json' });
+
+  // ---------- Login ----------
+  async function tryLogin(pw) {
+    const msg = $('login-msg');
+    msg.className = 'msg';
+    msg.textContent = 'Checking…';
+    try {
+      const r = await fetch('/api/save?check=1', { headers: { 'Authorization': 'Bearer ' + pw } });
+      if (r.status === 401) {
+        msg.className = 'msg bad';
+        msg.textContent = 'Wrong password — try again.';
+        return;
+      }
+      if (!r.ok) throw new Error();
+      password = pw;
+      sessionStorage.setItem('admin-pw', pw);
+      await loadContent();
+      $('login').hidden = true;
+      $('editor').hidden = false;
+      $('actions').hidden = false;
+    } catch {
+      msg.className = 'msg bad';
+      msg.textContent = 'Couldn\u2019t reach the API. This page only works on the deployed site (or via `vercel dev` locally).';
+    }
+  }
+  $('btn-login').onclick = () => tryLogin($('pw').value);
+  $('pw').addEventListener('keydown', (e) => { if (e.key === 'Enter') tryLogin($('pw').value); });
+  if (password) tryLogin(password);
+
+  // ---------- Load ----------
+  async function loadContent() {
+    let content = null;
+    try {
+      const r = await fetch('/content.json', { cache: 'no-store' });
+      if (r.ok) content = await r.json();
+    } catch { /* fall through to defaults */ }
+    if (!content || !content.packages) {
+      // Fallback: pull the defaults embedded in index.html
+      const html = await (await fetch('/index.html', { cache: 'no-store' })).text();
+      const m = html.match(/<script type="application\/json" id="site-content">([\s\S]*?)<\/script>/);
+      content = JSON.parse(m[1]);
+    }
+    init(content);
+  }
+
+  function init(c) {
+    $('f-logo').value = c.logo;
+    $('f-heroTag').value = c.heroTag;
+    $('f-l1').value = c.heroLine1;
+    $('f-l2').value = c.heroLine2;
+    $('f-l3a').value = c.heroLine3Accent;
+    $('f-l3b').value = c.heroLine3Rest;
+    $('f-heroPara').value = c.heroPara;
+    $('f-ticker').value = c.ticker.join('\n');
+    $('pkg-list').innerHTML = '';
+    c.packages.forEach(addPkg);
+    $('step-list').innerHTML = '';
+    c.steps.forEach(addStep);
+    photos.before = c.photoBefore || '';
+    photos.after = c.photoAfter || '';
+    renderPhoto('before'); renderPhoto('after');
+    $('f-phone').value = c.phone;
+    $('f-ig').value = c.instagram;
+    $('f-email').value = c.email;
+    $('f-footer').value = c.footer;
+  }
+
+  // ---------- Packages ----------
+  function addPkg(p) {
+    p = p || { name: 'New Package', price: '$0', blurb: '', badge: '', hot: false, items: ['Offering 1'] };
+    const div = document.createElement('div');
+    div.className = 'pkg';
+    div.innerHTML = `
+      <div class="pkg-head"><strong>Package</strong><button type="button" class="danger rm">Remove</button></div>
+      <div class="row">
+        <div><label>Name</label><input type="text" class="p-name"></div>
+        <div><label>Price</label><input type="text" class="p-price"></div>
+      </div>
+      <label>Short description</label><input type="text" class="p-blurb">
+      <label>Badge (leave empty for none)</label><input type="text" class="p-badge">
+      <div class="check"><input type="checkbox" class="p-hot"><span>Orange highlight badge</span></div>
+      <label>What's included (one per line)</label>
+      <textarea class="p-items"></textarea>`;
+    div.querySelector('.p-name').value = p.name;
+    div.querySelector('.p-price').value = p.price;
+    div.querySelector('.p-blurb').value = p.blurb;
+    div.querySelector('.p-badge').value = p.badge;
+    div.querySelector('.p-hot').checked = p.hot;
+    div.querySelector('.p-items').value = p.items.join('\n');
+    div.querySelector('.rm').onclick = () => div.remove();
+    $('pkg-list').appendChild(div);
+  }
+  $('add-pkg').onclick = () => addPkg();
+
+  // ---------- Steps ----------
+  function addStep(s) {
+    s = s || { title: 'New step', text: '' };
+    const div = document.createElement('div');
+    div.className = 'pkg';
+    div.innerHTML = `
+      <div class="pkg-head"><strong>Step</strong><button type="button" class="danger rm">Remove</button></div>
+      <label>Title</label><input type="text" class="s-title">
+      <label>Description</label><textarea class="s-text"></textarea>`;
+    div.querySelector('.s-title').value = s.title;
+    div.querySelector('.s-text').value = s.text;
+    div.querySelector('.rm').onclick = () => div.remove();
+    $('step-list').appendChild(div);
+  }
+  $('add-step').onclick = () => addStep();
+
+  // ---------- Photos ----------
+  function renderPhoto(which) {
+    const box = $('prev-' + which);
+    const src = pending[which] ? pending[which].dataUrl : photos[which];
+    box.innerHTML = src
+      ? `<img src="${src}" alt="${which} photo preview">`
+      : '<div class="empty">No photo yet</div>';
+  }
+
+  function handleFile(which, file) {
+    if (!file) return;
+    const img = new Image();
+    img.onload = () => {
+      const MAX = 1400;
+      const scale = Math.min(1, MAX / Math.max(img.width, img.height));
+      const canvas = document.createElement('canvas');
+      canvas.width = Math.round(img.width * scale);
+      canvas.height = Math.round(img.height * scale);
+      canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+      URL.revokeObjectURL(img.src);
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+      pending[which] = {
+        path: `photos/${which}-${Date.now()}.jpg`,
+        base64: dataUrl.split(',')[1],
+        dataUrl: dataUrl
+      };
+      renderPhoto(which);
+      setStatus('Photo staged — hit Save to publish', 'ok');
+    };
+    img.src = URL.createObjectURL(file);
+  }
+  $('f-before').onchange = (e) => handleFile('before', e.target.files[0]);
+  $('f-after').onchange = (e) => handleFile('after', e.target.files[0]);
+  $('clear-before').onclick = () => { photos.before = ''; pending.before = null; $('f-before').value = ''; renderPhoto('before'); };
+  $('clear-after').onclick = () => { photos.after = ''; pending.after = null; $('f-after').value = ''; renderPhoto('after'); };
+
+  // ---------- Collect + save ----------
+  function collect() {
+    const lines = (v) => v.split('\n').map(s => s.trim()).filter(Boolean);
+    return {
+      logo: $('f-logo').value,
+      ticker: lines($('f-ticker').value),
+      heroTag: $('f-heroTag').value,
+      heroLine1: $('f-l1').value,
+      heroLine2: $('f-l2').value,
+      heroLine3Accent: $('f-l3a').value,
+      heroLine3Rest: $('f-l3b').value,
+      heroPara: $('f-heroPara').value,
+      packages: [...document.querySelectorAll('#pkg-list .pkg')].map(d => ({
+        name: d.querySelector('.p-name').value,
+        price: d.querySelector('.p-price').value,
+        blurb: d.querySelector('.p-blurb').value,
+        badge: d.querySelector('.p-badge').value,
+        hot: d.querySelector('.p-hot').checked,
+        items: lines(d.querySelector('.p-items').value)
+      })),
+      photoBefore: pending.before ? '/' + pending.before.path : photos.before,
+      photoAfter: pending.after ? '/' + pending.after.path : photos.after,
+      steps: [...document.querySelectorAll('#step-list .pkg')].map(d => ({
+        title: d.querySelector('.s-title').value,
+        text: d.querySelector('.s-text').value
+      })),
+      phone: $('f-phone').value,
+      instagram: $('f-ig').value,
+      email: $('f-email').value,
+      footer: $('f-footer').value
+    };
+  }
+
+  function setStatus(msg, kind) {
+    const s = $('status');
+    s.textContent = msg;
+    s.className = 'status' + (kind ? ' ' + kind : '');
+  }
+
+  $('btn-save').onclick = async () => {
+    const btn = $('btn-save');
+    btn.disabled = true;
+    setStatus('Committing to GitHub…');
+    try {
+      const newPhotos = [pending.before, pending.after]
+        .filter(Boolean)
+        .map(p => ({ path: p.path, data: p.base64 }));
+      const r = await fetch('/api/save', {
+        method: 'POST',
+        headers: auth(),
+        body: JSON.stringify({ content: collect(), newPhotos })
+      });
+      if (r.status === 401) throw new Error('Wrong password — reload and log in again');
+      if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || 'Save failed');
+      // Staged photos are now committed files
+      if (pending.before) { photos.before = '/' + pending.before.path; pending.before = null; }
+      if (pending.after) { photos.after = '/' + pending.after.path; pending.after = null; }
+      setStatus('✓ Committed to GitHub — Vercel is deploying, live in ~1 min', 'ok');
+    } catch (e) {
+      setStatus(e.message, 'bad');
+    } finally {
+      btn.disabled = false;
+    }
+  };
+})();
+</script>
+
+</body>
+</html>
