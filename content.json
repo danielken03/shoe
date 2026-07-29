@@ -1,6 +1,13 @@
 {
-  "logo": "SHOE",
-  "ticker": ["PROFESSIONAL CLEAN", "DEEP CLEAN", "SUEDE SAFE", "SAME-WEEK SERVICE"],
+  "logo": "Company Name",
+  "ticker": [
+    "Phrase 1",
+    "Phrase 2",
+    "Phrase 3",
+    "Phrase 4",
+    "Phrase 5",
+    "Phrase 6"
+  ],
   "heroTag": "/// SNEAKER + SHOE CLEANING — NASHVILLE",
   "heroLine1": "TEXT",
   "heroLine2": "TEXT.",
@@ -9,37 +16,62 @@
   "heroPara": "Hand-detailed cleaning for sneakers, suede, leather. Clean as a whistle!",
   "packages": [
     {
-      "name": "The Refresh",
+      "name": "Package 1",
       "price": "$25",
       "blurb": "Your message here",
       "badge": "",
       "hot": false,
-      "items": ["Offering 1", "Offering 2", "Offering 3"]
+      "items": [
+        "Offering 1",
+        "Offering 2",
+        "Offering 3"
+      ]
     },
     {
-      "name": "The Deep Clean",
+      "name": "Package 2",
       "price": "$45",
       "blurb": "Your message here",
       "badge": "MOST POPULAR",
       "hot": true,
-      "items": ["Everything in The Refresh", "Offering 2", "Offering 3", "Offering 4"]
+      "items": [
+        "Everything in Package 1",
+        "Offering 2",
+        "Offering 3",
+        "Offering 4"
+      ]
     },
     {
-      "name": "Suede & Delicates",
+      "name": "Package 3",
       "price": "$60",
       "blurb": "Your message here",
       "badge": "BEST DEAL",
       "hot": false,
-      "items": ["Offering 1", "Offering 2", "Offering 3"]
+      "items": [
+        "Offering 1",
+        "Offering 2",
+        "Offering 3"
+      ]
     }
   ],
-  "photoBefore": "",
-  "photoAfter": "",
+  "photoBefore": "/photos/before-1785349595465.jpg",
+  "photoAfter": "/photos/after-1785349647190.jpg",
   "steps": [
-    { "title": "Send a Pic", "text": "Text or DM us a photo of your shoes. We'll confirm the price and details before you book." },
-    { "title": "Drop Off", "text": "Bring them by or arrange a pickup." },
-    { "title": "We Work", "text": "Hand-cleaned, polished, repaired, etc all done professionally." },
-    { "title": "Walk Fresh", "text": "Pick up your shoes looking good as new, and walk out with confidence." }
+    {
+      "title": "Send a Pic",
+      "text": "Text or DM us a photo of your shoes. We'll confirm the price and details before you book."
+    },
+    {
+      "title": "Drop Off",
+      "text": "Bring them by or arrange a pickup."
+    },
+    {
+      "title": "We Work",
+      "text": "Hand-cleaned, polished, repaired, etc all done professionally."
+    },
+    {
+      "title": "Walk Fresh",
+      "text": "Pick up your shoes looking good as new, and walk out with confidence."
+    }
   ],
   "phone": "(615) 111-1111",
   "instagram": "@yourhandle",
