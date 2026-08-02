@@ -10,16 +10,16 @@
     "Outsole",
     "Midsole"
   ],
-  "heroTag": "/// SHOE CLEANING - SAN PEDRO LAGUANA - NASHVILLE",
-  "heroLine1": "CLEAN FEET.",
-  "heroLine2": "CLEAN SHOE.",
-  "heroLine3Accent": "CLEAN LOOK.",
+  "heroTag": "/// SHOE CLEANING - NASHVILLE - PHILIPPINES",
+  "heroLine1": "CLEAN SHOE.",
+  "heroLine2": "CLEAN LOOK.",
+  "heroLine3Accent": "CLEAN FEET.",
   "heroLine3Rest": "",
   "heroPara": "Does your sneakers look worn out? Bring them to South Sole Clinic for these special services. ",
   "packages": [
     {
       "name": "Basic cleaning",
-      "price": "350",
+      "price": "35",
       "blurb": "For minimal dirt",
       "badge": "",
       "hot": false,
@@ -30,7 +30,7 @@
     },
     {
       "name": "Deep cleaning",
-      "price": "450",
+      "price": "45",
       "blurb": "For heavy dirt",
       "badge": "MOST POPULAR",
       "hot": true,
@@ -42,7 +42,7 @@
     },
     {
       "name": "Premium cleaning",
-      "price": "600",
+      "price": "75",
       "blurb": "For heavy dirt",
       "badge": "BEST DEAL",
       "hot": false,
@@ -55,7 +55,7 @@
     },
     {
       "name": "Un-yellowing",
-      "price": "Rubber: 500   Clear: 1000",
+      "price": "Rubber: 45   Clear: 60",
       "blurb": "Remove the yellowing from the shoe",
       "badge": "",
       "hot": false,
@@ -85,7 +85,7 @@
       "text": "Pick up your shoes looking good as new, and walk out with confidence."
     }
   ],
-  "phone": "+63 927 232 8599",
+  "phone": "+615 839 0233",
   "instagram": "@southsoleclinic",
   "email": "southsoleclinic@gmail.com",
   "footer": "© 2026 SHOES — Nashville, TN"
